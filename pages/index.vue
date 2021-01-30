@@ -2,9 +2,16 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <div class="text-center">
-        <!-- <logo />
-        <vuetify-logo /> -->
+        <logo />
+        <!-- <vuetify-logo /> -->
       </div>
+      <v-row>
+        <v-col>
+          <div class="text-center">
+            <BgViewer />
+          </div>
+        </v-col>
+      </v-row>
       <!-- <v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
@@ -81,12 +88,14 @@
 </template>
 
 <script>
-// import Logo from '~/components/Logo.vue'
+import Logo from '~/components/Logo.vue'
+import BgViewer from '~/components/BgViewer.vue'
 // import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
 export default {
   components: {
-    // Logo,
+    Logo,
+    BgViewer,
     // VuetifyLogo,
   },
 }

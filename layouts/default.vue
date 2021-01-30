@@ -29,7 +29,7 @@
       </v-container>
     </v-main>
     <v-row>
-      <v-col xs-only>
+      <v-col :xs="6">
         <v-footer :absolute="!fixed" app>
           <span>&copy; {{ new Date().getFullYear() }}</span>
         </v-footer>
