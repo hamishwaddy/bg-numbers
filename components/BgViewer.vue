@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { formatDistanceToNow } from 'date-fns'
 import axios from 'axios'
 export default {
   name: 'BgViewer',
@@ -36,7 +37,10 @@ export default {
         )
         return (this.currentBgInfo = {
           sgv: data[0].sgv,
-          time: data[0].sysTime,
+          time: formatDistanceToNow(Date.parse(data[0].sysTime), {
+            includeSeconds: true,
+            addSuffix: true,
+          }),
           direction: data[0].direction,
         })
       } catch (e) {
