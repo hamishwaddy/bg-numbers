@@ -51,7 +51,7 @@ export default {
 .bg-viewer {
   h3,
   h1 {
-    color: lightblue;
+    color: #bada55;
   }
 }
 </style>
