@@ -23,6 +23,9 @@ export default {
   },
   mounted() {
     this.fetchCurrentBgInfo()
+    setInterval(async () => {
+      await this.fetchCurrentBgInfo()
+    }, 30000)
   },
   methods: {
     async fetchCurrentBgInfo() {
