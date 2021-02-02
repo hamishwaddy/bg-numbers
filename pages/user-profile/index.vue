@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <h3>User profile</h3>
-  </div>
+  <v-card>
+    <v-card-title>Profile</v-card-title>
+    <v-card-subtitle>All about you</v-card-subtitle>
+  </v-card>
 </template>
 
 <script>
