@@ -89,13 +89,18 @@ export default {
 
 <style lang="scss" scoped>
 .bg-viewer {
+  border: 1px solid lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h1 {
-    font-size: 48px;
+    font-size: 96px;
   }
 
   h3,
   h1 {
-    color: #bada55;
+    color: $color-text-white;
   }
 }
 
@@ -103,16 +108,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid lightblue;
 }
 
-.bg-value-left {
-  padding: 6px;
-}
+// .bg-value-left {
+//   margin-right: 6px;
+// }
 
 .v-icon {
-  font-size: 48px;
-  // margin: 0;
-  // padding: 0;
+  font-size: 96px;
+  color: $color-secondary;
 }
 
 .double-arrow {
