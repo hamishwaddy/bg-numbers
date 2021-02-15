@@ -107,7 +107,7 @@ export default {
 }
 
 .headline {
-  font-size: 56px !important;
+  font-size: 58px !important;
   font-weight: 700;
   margin: 12px 0 16px;
 }
