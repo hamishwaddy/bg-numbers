@@ -1,19 +1,11 @@
 <template>
-  <div>
-    <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="6">
-        <div class="text-center">
-          <Logo />
-        </div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <div class="text-center">
-          <BgViewer />
-        </div>
-      </v-col>
-    </v-row>
+  <div class="wrapper">
+    <div class="logo-wrapper">
+      <Logo />
+    </div>
+    <div class="bg-viewer">
+      <BgViewer />
+    </div>
   </div>
 </template>
 
@@ -28,3 +20,10 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
+  <v-app>
+    <!-- <v-navigation-drawer v-model="drawer" :clipped="clipped" right absolute app>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -17,29 +17,27 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    </v-navigation-drawer> -->
+    <!-- <v-app-bar :clipped-right="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-    </v-app-bar>
+    </v-app-bar> -->
     <v-main>
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-    <v-row>
-      <v-col :xs="6">
-        <v-footer :absolute="!fixed" app>
-          <span>&copy; {{ new Date().getFullYear() }}</span>
-        </v-footer>
-      </v-col>
-    </v-row>
+    <Footer />
   </v-app>
 </template>
 
 <script>
+import Footer from '@/components/Footer.vue'
 export default {
+  components: {
+    Footer,
+  },
   data() {
     return {
       clipped: false,

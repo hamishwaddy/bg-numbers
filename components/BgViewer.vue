@@ -1,43 +1,50 @@
 <template>
-  <div class="bg-viewer">
-    <div class="bg-number">
-      <div class="bg-value-left">
-        <h1>{{ currentBgInfo.sgv | toMmol }}</h1>
-      </div>
-      <div class="bg-arrow-right">
-        <span
-          v-if="currentBgInfo.direction === 'DoubleUp'"
-          class="double-arrow"
-        >
-          <v-icon>mdi-arrow-up-thick</v-icon>
-          <v-icon>mdi-arrow-up-thick</v-icon>
-        </span>
-        <span v-else-if="currentBgInfo.direction === 'SingleUp'">
-          <v-icon>mdi-arrow-up-thick</v-icon>
-        </span>
-        <span v-else-if="currentBgInfo.direction === 'FortyFiveUp'">
-          <v-icon>mdi-arrow-top-right-thick</v-icon>
-        </span>
-        <span v-else-if="currentBgInfo.direction === 'Flat'">
-          <v-icon>mdi-arrow-right-thick</v-icon>
-        </span>
-        <span v-else-if="currentBgInfo.direction === 'FortyFiveDown'">
-          <v-icon>mdi-arrow-bottom-right-thick</v-icon>
-        </span>
-        <span v-else-if="currentBgInfo.direction === 'SingleDown'">
-          <v-icon>mdi-arrow-down-thick</v-icon>
-        </span>
-        <span
-          v-else-if="currentBgInfo.direction === 'DoubleDown'"
-          class="double-arrow"
-        >
-          <v-icon>mdi-arrow-down-thick</v-icon>
-          <v-icon>mdi-arrow-down-thick</v-icon>
-        </span>
-      </div>
-    </div>
-    <h3>{{ currentBgInfo.time }}</h3>
-  </div>
+  <v-row>
+    <v-col cols="12">
+      <v-card class="card">
+        <div class="d-flex flex-no-wrap justify-space-between">
+          <div>
+            <v-card-title
+              class="headline"
+              v-text="convertToMmol(currentBgInfo.sgv)"
+            />
+            <v-card-subtitle v-text="currentBgInfo.timeAgo"></v-card-subtitle>
+          </div>
+          <v-avatar class="ma-3" size="125" tile>
+            <span
+              v-if="currentBgInfo.direction === 'DoubleUp'"
+              class="double-arrow"
+            >
+              <v-icon>mdi-arrow-up-thick</v-icon>
+              <v-icon>mdi-arrow-up-thick</v-icon>
+            </span>
+            <span v-else-if="currentBgInfo.direction === 'SingleUp'">
+              <v-icon>mdi-arrow-up-thick</v-icon>
+            </span>
+            <span v-else-if="currentBgInfo.direction === 'FortyFiveUp'">
+              <v-icon>mdi-arrow-top-right-thick</v-icon>
+            </span>
+            <span v-else-if="currentBgInfo.direction === 'Flat'">
+              <v-icon>mdi-arrow-right-thick</v-icon>
+            </span>
+            <span v-else-if="currentBgInfo.direction === 'FortyFiveDown'">
+              <v-icon>mdi-arrow-bottom-right-thick</v-icon>
+            </span>
+            <span v-else-if="currentBgInfo.direction === 'SingleDown'">
+              <v-icon>mdi-arrow-down-thick</v-icon>
+            </span>
+            <span
+              v-else-if="currentBgInfo.direction === 'DoubleDown'"
+              class="double-arrow"
+            >
+              <v-icon>mdi-arrow-down-thick</v-icon>
+              <v-icon>mdi-arrow-down-thick</v-icon>
+            </span>
+          </v-avatar>
+        </div>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -49,7 +56,7 @@ export default {
     return {
       currentBgInfo: {
         sgv: null,
-        time: '',
+        timeAgo: '',
         direction: '',
       },
     }
@@ -59,6 +66,9 @@ export default {
     setInterval(async () => {
       await this.fetchCurrentBgInfo()
     }, 30000)
+  },
+  beforeDestroy() {
+    clearInterval(this.fetchCurrentBgInfo)
   },
   methods: {
     async fetchCurrentBgInfo() {
@@ -73,51 +83,44 @@ export default {
         )
         return (this.currentBgInfo = {
           sgv: data[0].sgv,
-          time: formatDistanceToNow(Date.parse(data[0].sysTime), {
+          timeAgo: formatDistanceToNow(Date.parse(data[0].sysTime), {
             includeSeconds: true,
             addSuffix: true,
           }),
           direction: data[0].direction,
         })
-      } catch (e) {
-        console.log('Err: ', e)
+      } catch (err) {
+        throw new Error('Failed to fetch current BG info. \nErr: ', err)
       }
+    },
+    convertToMmol(val) {
+      return (val / 18.018018).toFixed(1)
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.bg-viewer {
-  border: 1px solid lightblue;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  h1 {
-    font-size: 96px;
-  }
+.card {
+  background-color: $color-primary-dark;
+  border-radius: 16px;
+}
 
-  h3,
-  h1 {
-    color: $color-text-white;
-  }
+.headline {
+  font-size: 56px !important;
+  font-weight: 700;
+  margin: 12px 0 16px;
 }
 
 .bg-number {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid lightblue;
 }
-
-// .bg-value-left {
-//   margin-right: 6px;
-// }
 
 .v-icon {
   font-size: 96px;
-  color: $color-secondary;
+  color: $color-secondary-dark;
 }
 
 .double-arrow {
