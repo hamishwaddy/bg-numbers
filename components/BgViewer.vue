@@ -1,46 +1,63 @@
 <template>
   <v-row>
-    <v-col cols="12">
+    <v-col>
       <v-card class="card">
-        <div class="d-flex flex-no-wrap justify-space-between">
-          <div>
+        <div class="card-header-section">
+          <div class="text-info">
             <v-card-title
-              class="headline"
+              class="title"
               v-text="convertToMmol(currentBgInfo.sgv)"
             />
-            <v-card-subtitle v-text="currentBgInfo.timeAgo"></v-card-subtitle>
+            <v-card-subtitle class="subtitle" v-text="currentBgInfo.timeAgo" />
           </div>
-          <v-avatar class="ma-3" size="125" tile>
+          <div class="arrow-info">
             <span
               v-if="currentBgInfo.direction === 'DoubleUp'"
-              class="double-arrow"
+              class="double-arrow-up"
             >
-              <v-icon>mdi-arrow-up-thick</v-icon>
-              <v-icon>mdi-arrow-up-thick</v-icon>
+              <font-awesome-icon :icon="['fas', 'arrow-up']" />
+              <font-awesome-icon :icon="['fas', 'arrow-up']" />
             </span>
             <span v-else-if="currentBgInfo.direction === 'SingleUp'">
-              <v-icon>mdi-arrow-up-thick</v-icon>
+              <font-awesome-icon :icon="['fas', 'arrow-up']" />
             </span>
             <span v-else-if="currentBgInfo.direction === 'FortyFiveUp'">
-              <v-icon>mdi-arrow-top-right-thick</v-icon>
+              <font-awesome-icon
+                class="forty-five-up"
+                :icon="['fas', 'arrow-right']"
+              />
             </span>
             <span v-else-if="currentBgInfo.direction === 'Flat'">
-              <v-icon>mdi-arrow-right-thick</v-icon>
+              <font-awesome-icon :icon="['fas', 'arrow-right']" />
             </span>
             <span v-else-if="currentBgInfo.direction === 'FortyFiveDown'">
-              <v-icon>mdi-arrow-bottom-right-thick</v-icon>
+              <font-awesome-icon
+                class="forty-five-down"
+                :icon="['fas', 'arrow-right']"
+              />
             </span>
             <span v-else-if="currentBgInfo.direction === 'SingleDown'">
-              <v-icon>mdi-arrow-down-thick</v-icon>
+              <font-awesome-icon :icon="['fas', 'arrow-down']" />
             </span>
             <span
               v-else-if="currentBgInfo.direction === 'DoubleDown'"
-              class="double-arrow"
+              class="double-arrow-down"
             >
-              <v-icon>mdi-arrow-down-thick</v-icon>
-              <v-icon>mdi-arrow-down-thick</v-icon>
+              <font-awesome-icon :icon="['fas', 'arrow-down']" />
+              <font-awesome-icon :icon="['fas', 'arrow-down']" />
             </span>
-          </v-avatar>
+          </div>
+        </div>
+        <hr />
+        <div class="info-chips">
+          <v-chip color="primary">
+            <font-awesome-icon :icon="['fas', 'syringe']" />
+            IOB</v-chip
+          >
+          <v-chip color="primary">
+            <font-awesome-icon :icon="['fas', 'pizza-slice']" />
+            CARBS</v-chip
+          >
         </div>
       </v-card>
     </v-col>
@@ -104,12 +121,33 @@ export default {
 .card {
   background-color: $color-primary-dark;
   border-radius: 16px;
+  padding: 16px;
 }
 
-.headline {
-  font-size: 58px !important;
+.card-header-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.text-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.v-card__title {
+  font-size: 60px !important;
   font-weight: 700;
-  margin: 12px 0 16px;
+  padding: 12px 0;
+  margin-bottom: 12px;
+}
+
+.v-card__subtitle {
+  font-size: 14px !important;
+  font-weight: 300;
+  padding: 0;
+  text-align: center;
 }
 
 .bg-number {
@@ -118,14 +156,31 @@ export default {
   align-items: center;
 }
 
-.v-icon {
-  font-size: 96px;
-  color: $color-secondary-dark;
+span svg {
+  font-size: 70px;
 }
 
-.double-arrow {
-  v-icon :nth-child(2) {
-    margin-right: -20px;
+.double-arrow-up,
+.double-arrow-down {
+  display: flex;
+}
+
+.forty-five-up {
+  transform: rotate(-45deg);
+}
+
+.forty-five-down {
+  transform: rotate(45deg);
+}
+
+.info-chips {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-around;
+
+  svg {
+    font-size: 16px;
+    margin-right: 4px;
   }
 }
 </style>
