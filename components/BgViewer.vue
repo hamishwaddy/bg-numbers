@@ -46,6 +46,12 @@
               <font-awesome-icon :icon="['fas', 'arrow-down']" />
               <font-awesome-icon :icon="['fas', 'arrow-down']" />
             </span>
+            <span
+              v-else-if="currentBgInfo.direction === 'NOT COMPUTABLE'"
+              class="no-data"
+            >
+              <font-awesome-icon :icon="['fas', 'exclamation']" />
+            </span>
           </div>
         </div>
         <hr />
@@ -157,7 +163,7 @@ export default {
 }
 
 span svg {
-  font-size: 70px;
+  font-size: 40px;
 }
 
 .double-arrow-up,
@@ -173,6 +179,17 @@ span svg {
   transform: rotate(45deg);
 }
 
+.no-data {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  svg,
+  span {
+    color: $color-primary-light;
+  }
+}
 .info-chips {
   margin-top: 16px;
   display: flex;

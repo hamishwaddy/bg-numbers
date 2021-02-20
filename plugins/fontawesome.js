@@ -5,6 +5,7 @@ import {
   faArrowDown,
   faArrowRight,
   faArrowUp,
+  faExclamation,
   faSyringe,
   faPizzaSlice,
 } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +15,14 @@ config.autoAddCss = false
 
 // You can add your icons directly in this plugin. See other examples for how you
 // can add other styles or just individual icons.
-library.add(faArrowUp, faArrowDown, faArrowRight, faSyringe, faPizzaSlice)
+library.add(
+  faArrowUp,
+  faArrowDown,
+  faArrowRight,
+  faSyringe,
+  faPizzaSlice,
+  faExclamation
+)
 
 // Register the component globally
 Vue.component('font-awesome-icon', FontAwesomeIcon)
